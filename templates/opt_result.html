@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='opt_style.css') }}">
+</head>
+<body>
+    <div class="result-container">
+        <h1>Best Condition for Highest Enzyme Activity is:</h1>
+        <div class="result-item">
+            <label>Incubation Time (Hr.):</label>
+            <p>{{ best_combination[0][0] }}</p>
+        </div>
+        <div class="result-item">
+            <label>pH:</label>
+            <p>{{ best_combination[0][1] }}</p>
+        </div>
+        <div class="result-item">
+            <label>Agitation Speed (rpm):</label>
+            <p>{{ best_combination[0][2] }}</p>
+        </div>
+        <div class="result-item">
+            <label>Temperature (°C):</label>
+            <p>{{ best_combination[0][3] }}</p>
+        </div>
+        <div class="result-item">
+            <label>Carbon (Pectin) %w/v:</label>
+            <p>{{ best_combination[0][4] }}</p>
+        </div>
+        <div class="result-item">
+            <label>Nitrogen (Organic) %w/v:</label>
+            <p>{{ best_combination[0][5] }}</p>
+        </div>
+        <div class="result-item">
+            <label>Predicted Pectinase Activity (U):</label>
+            <p>{{ '{:.3f}'.format(best_combination[1]) }}</p>
+        </div>
+        <div class="result-item">
+            <label>Error Percentage:</label>
+            <p> < 1% </p>
+        </div>
+        <div class="button-container">
+            <a href="/">Home</a>
+        </div>
+    </div>
+</body>
+</html>

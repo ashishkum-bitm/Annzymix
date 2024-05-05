@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>ML Model Web App</title>
+</head>
+<body>
+    <p class="intro"><b>Welcome to Annzymix, your ultimate enzyme activity predictor and optimizer!</b> 
+        Harnessing the power of artificial neural networks (ANN), our app offers precise predictions 
+        and optimal conditions for enzyme activity, revolutionizing your research process with efficiency and accuracy.<br>
+        For demonstration purpose Pectinase enzyme is chosen. Pectinases are produced by microorganisms, <br>with fungi and bacteria being the primary sources.</p>
+        <img src= "{{ url_for('static', filename='pectinase_1.png') }}" alt="Pactinase Structre">
+    <!-- <h2>Select Type:</h2> -->
+    <form class="home" action="/select_prediction" method="post">
+    <div class="sub">
+        <button class="button" type="submit" name="prediction_type" value="fungus">Fungal Pectinase Activity Predictor</button>
+        <button class="button" type="submit" name="prediction_type" value="fungus_opt">Fungal Pectinase Condition Optimizer</button>
+    </div>
+    <div class="sub">
+        <button class="button" type="submit" name="prediction_type" value="bacteria">Bacterial Pectinase Activity Predictor</button>
+        <button class="button" type="submit" name="prediction_type" value="bacteria_opt">Bacterial Pectinase Condition Optimizer</button>
+    </div>
+    </form>
+</body>
+</html>

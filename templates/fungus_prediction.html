@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Fungus Prediction</title>
+</head>
+<body>
+    <div class="container">
+        <form class="form" action="/predict_fungus" method="post">
+            <div class="form_front">
+                <h2 class="form_details">Fungal Pectinase Activity Prediction</h2>
+                <input type="text" class="input" name="feature1" placeholder="Incubation Time (Hr.)">
+                <input type="text" class="input" name="feature2" placeholder="pH">
+                <input type="text" class="input" name="feature3" placeholder="Agitation Speed (rpm)">
+                <input type="text" class="input" name="feature4" placeholder="Temperature (°C)">
+                <input type="text" class="input" name="feature5" placeholder="Carbon (Pectin) %w/v">
+                <input type="text" class="input" name="feature6" placeholder="Nitrogen (Organic) %w/v">
+                <button class="btn" type="submit">Predict</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

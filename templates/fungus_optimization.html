@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enzyme Activity Prediction</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='opt_style.css') }}">
+    <script>
+        function validateInput() {
+            var incubationTimeMin = document.getElementById("incubation_time_min").value;
+            var incubationTimeMax = document.getElementById("incubation_time_max").value;
+            var pHMin = document.getElementById("pH_min").value;
+            var pHMax = document.getElementById("pH_max").value;
+            var agitationSpeedMin = document.getElementById("agitation_speed_min").value;
+            var agitationSpeedMax = document.getElementById("agitation_speed_max").value;
+            var temperatureMin = document.getElementById("temperature_min").value;
+            var temperatureMax = document.getElementById("temperature_max").value;
+            var incubationTimeIncrement = document.getElementById("incubation_time_increment").value;
+            var pHIncrement = document.getElementById("pH_increment").value;
+            var agitationSpeedIncrement = document.getElementById("agitation_speed_increment").value;
+            var temperatureIncrement = document.getElementById("temperature_increment").value;
+            var carbonIncrement = document.getElementById("carbon_increment").value;
+            var nitrogenIncrement = document.getElementById("nitrogen_increment").value;
+
+            incubationTimeIncrement = incubationTimeIncrement.trim() === "" ? 1 : parseInt(incubationTimeIncrement);
+            pHIncrement = pHIncrement.trim() === "" ? 0.1 : parseFloat(pHIncrement);
+            agitationSpeedIncrement = agitationSpeedIncrement.trim() === "" ? 1 : parseInt(agitationSpeedIncrement);
+            temperatureIncrement = temperatureIncrement.trim() === "" ? 1 : parseInt(temperatureIncrement);
+            carbonIncrement = carbonIncrement.trim() === "" ? 0.1 : parseFloat(carbonIncrement);
+            nitrogenIncrement = nitrogenIncrement.trim() === "" ? 0.1 : parseFloat(nitrogenIncrement);
+
+            if (isNaN(incubationTimeMin) || isNaN(incubationTimeMax) || isNaN(pHMin) || isNaN(pHMax) ||
+                isNaN(agitationSpeedMin) || isNaN(agitationSpeedMax) || isNaN(temperatureMin) || isNaN(temperatureMax)) {
+                alert("Please enter numeric values for all fields.");
+                return false;
+            }
+
+            if (incubationTimeMin >= incubationTimeMax || pHMin >= pHMax ||
+                agitationSpeedMin >= agitationSpeedMax || temperatureMin >= temperatureMax) {
+                alert("Please ensure that the minimum value is less than the maximum value for all fields.");
+                return false;
+            }
+
+            showLoading()
+            return true;
+        }
+        function showLoading() {
+            document.getElementById("loading").style.display = "block";
+            document.getElementById("content").style.display = "none";
+        }
+    </script>
+</head>
+<body>
+    <div id="content">
+    <div class="container">
+        <form action="/optimize_fungus" method="post" onsubmit="return validateInput()">
+            <div class="form_front">
+                <h1 class="form_details">Fungal Pactinase Condition Optimization</h1>
+                <div class="field">
+                    <br><label for="incubation_time_min">Incubation Time (Hr.)</label>
+                    <input type="number" class="input" id="incubation_time_min" name="incubation_time_min" placeholder="Minimum" required>
+                    <input type="number" class="input" id="incubation_time_max" name="incubation_time_max" placeholder="Maximum" required>
+                    <input type="number" class="input" id="incubation_time_increment" name="incubation_time_increment" placeholder="Increment (Default = 1)"><br>
+                </div>
+
+                <div class="field">
+                    <br><label for="pH_min">pH</label>
+                    <input type="number" class="input" id="pH_min" name="pH_min" step="0.1" placeholder="Minimum" required>
+                    <input type="number" class="input" id="pH_max" name="pH_max" step="0.1" placeholder="Maximum" required>
+                    <input type="number" class="input" id="pH_increment" name="pH_increment" placeholder="Increment(Default = 0.1)" step="0.1"><br>
+                </div>
+
+                <div class="field">
+                    <br><label for="agitation_speed_min">Agitation Speed (rpm)</label>
+                    <input type="number" class="input" id="agitation_speed_min" name="agitation_speed_min" placeholder="Minimum" required>
+                    <input type="number" class="input" id="agitation_speed_max" name="agitation_speed_max" placeholder="Maximum" required>
+                    <input type="number" class="input" id="agitation_speed_increment" name="agitation_speed_increment" placeholder="Increment (Default = 1)"><br>
+                </div>
+
+                <div class="field">
+                    <br><label for="temperature_min">Temperature (°C)</label>
+                    <input type="number" class="input" id="temperature_min" name="temperature_min" placeholder="Minimum" required>
+                    <input type="number" class="input" id="temperature_max" name="temperature_max" placeholder="Maximum" required>
+                    <input type="number" class="input" id="temperature_increment" name="temperature_increment" placeholder="Increment (Default = 1)"><br>
+                </div>
+                <div class="field">
+                    <br><label for="carbon_min">Carbon (Pectin) %w/v</label>
+                    <input type="number" class="input" id="carbon_min" name="carbon_min" placeholder="Minimum" step="0.1" required>
+                    <input type="number" class="input" id="carbon_max" name="carbon_max" placeholder="Maximum" step="0.1" required>
+                    <input type="number" class="input" id="carbon_increment" name="carbon_increment" placeholder="Increment(Default = 0.1)" step="0.1"><br>
+                </div>
+                <div class="field">
+                    <br><label for="nitrogen_min">Nitrogen(Organic) %w/v</label>
+                    <input type="number" class="input" id="nitrogen_min" name="nitrogen_min" placeholder="Minimum" step="0.1" required>
+                    <input type="number" class="input" id="nitrogen_max" name="nitrogen_max" placeholder="Maximum" step="0.1" required>
+                    <input type="number" class="input" id="nitrogen_increment" name="nitrogen_increment" placeholder="Increment (Default = 0.1)" step="0.1"><br>
+                </div>
+
+                <div class="field">
+                    <input type="submit" class="btn" value="Submit">
+                    <input type="reset" class="btn" value="Reset">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+    <div id="loading" class="loader" style="display: none;">
+        <span>Loading...</span>
+    </div>
+</body>
+</html>

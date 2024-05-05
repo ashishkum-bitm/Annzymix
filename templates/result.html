@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Prediction Result</title>
+</head>
+<body>
+    <h2>Result:</h2>
+    <p class="result-text">The Predicted Pectinase activity (U) is: {{ '{:.3f}'.format(prediction) }} </p>
+    <p class="result-text">Error percentage: < 1% </p>
+    <div class="button-container">
+        <a href="/">Home</a>
+    </div>
+</body>
+</html>
